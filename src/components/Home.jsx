@@ -108,7 +108,7 @@ function Home() {
     if (error.response) {
       if (error.response.status === 401) {
         localStorage.clear();
-        navigate("/login");
+        navigate("/dashboard");
       } else {
         console.log("Error:", error.response.data.message);
       }
