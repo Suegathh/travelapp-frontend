@@ -3,6 +3,7 @@ import Password from "./password";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../utilis/helper";
 import axiosInstance from "../utilis/axiosInstance";
+import loginBgImage from "../assets/images/login-background.webp";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ function Login() {
       return;
     }
     setError("");
-  
+
     try {
       const response = await axiosInstance.post("/login", {
         email: email,
@@ -36,7 +37,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Login Error Details:", error); // Log the complete error object
-    
+      
       if (error.response && error.response.data && error.response.data.message) {
         setError(error.response.data.message); // Display the error message from the backend
       } else if (error.message) {
@@ -45,16 +46,17 @@ function Login() {
         setError("An unexpected error occurred. Please try again later!");
       }
     }
-    
   };
-  
 
   return (
     <div className="h-screen bg-cyan-50 overflow-hidden relative">
       <div className="login-ui-box right-10 -top-40" />
       <div className="login-ui-box bg-cyan-200 -bottom-40 -right-1/2" />
       <div className="container h-screen flex items-center justify-center px-20 mx-auto">
-        <div className="w-2/4 h-[90vh] flex items-end bg-login-bg-img bg-cover bg-center rounded-lg p-10 z-50">
+        <div 
+          className="w-2/4 h-[90vh] flex items-end bg-cover bg-center rounded-lg p-10 z-50"
+          style={{ backgroundImage: `url(${loginBgImage})` }}
+        >
           <div>
             <h4 className="text-5xl text-white font-semibold leading-[50px]">
               Capture Your <br /> Journeys
@@ -67,7 +69,7 @@ function Login() {
         <div className="w-2/4 h-[75vh] bg-white rounded-r-lg relative p-16 shadow-lg shadow-cyan-200/20">
           <form onSubmit={handleLogin}>
             <h4 className="text-2xl font-semibold mb-7">Login</h4>
-
+            
             <input
               type="text"
               placeholder="Email"
@@ -75,14 +77,14 @@ function Login() {
               value={email}
               onChange={({ target }) => setEmail(target.value)}
             />
-
+            
             <Password
               value={password}
               onChange={({ target }) => setPassword(target.value)}
             />
-
+            
             {error && <p className="text-red-500 text-xs pb-1">{error}</p>}
-
+            
             <button type="submit" className="btn-primary">Login</button>
             <p className="text-xs text-slate-500 text-center my-4">Or</p>
             <button

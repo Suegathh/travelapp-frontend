@@ -3,6 +3,7 @@ import Password from "./password";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../utilis/helper";
 import axiosInstance from "../utilis/axiosInstance";
+import signupBgImage from "../assets/images/signup-background.webp"; // Import the signup background image
 
 function Signup() {
   const [name, setName] = useState("");
@@ -58,7 +59,10 @@ function Signup() {
       <div className="login-ui-box right-10 -top-40" />
       <div className="login-ui-box bg-cyan-200 -bottom-40 -right-1/2" />
       <div className="container h-screen flex items-center justify-center px-20 mx-auto">
-        <div className="w-2/4 h-[90vh] flex items-end bg-signup-bg-img bg-cover bg-center rounded-lg p-10 z-50">
+        <div 
+          className="w-2/4 h-[90vh] flex items-end bg-cover bg-center rounded-lg p-10 z-50"
+          style={{ backgroundImage: `url(${signupBgImage})` }}
+        >
           <div>
             <h4 className="text-5xl text-white font-semibold leading-[50px]">
               Join the <br />Adventure
